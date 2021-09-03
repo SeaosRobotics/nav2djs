@@ -140,6 +140,10 @@
     return robotMarker.visible;
   };
 
+  that.update = function (options) {
+    robotMarker.update(options);
+  };
+
   /**
    * Hide the marker on the canvas
    */
