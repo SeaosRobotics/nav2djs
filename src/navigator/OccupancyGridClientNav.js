@@ -3,12 +3,17 @@
  */
 
 /**
+ * Modified by David Molina molina@seaos.co.jp
+ */
+
+/**
  * A OccupancyGridClientNav uses an OccupancyGridClient to create a map for use with a Navigator.
  *
  * @constructor
  * @param options - object with following keys:
  *   * ros - the ROSLIB.Ros connection handle
  *   * tfClient (optional) - Read information from TF
+ *   * robotClient (optional) - the calling instance in order to use web sockets
  *   * topic (optional) - the map topic to listen to
  *   * robot_pose (optional) - the robot topic or TF to listen position
  *   * rootObject (optional) - the root object to add this marker to
@@ -23,8 +28,9 @@
 NAV2D.OccupancyGridClientNav = function(options) {
   var that = this;
   options = options || {};
-  var ros = options.ros;
+  var ros = options.ros || null;
   var tfClient = options.tfClient || null;
+  var robotClient = options.robotClient || null;
   var map_topic = options.topic || '/map';
   var robot_pose = options.robot_pose || '/robot_pose';
   var continuous = options.continuous;
@@ -35,24 +41,30 @@ NAV2D.OccupancyGridClientNav = function(options) {
   var withOrientation = options.withOrientation || false;
   var image = options.image || false;
   var old_state = null;
+  var client = options.gridClient || null;
+  var fillColor = options.fillColor || null;
 
   // setup a client to get the map
-  var client = new ROS2D.OccupancyGridClient({
-    ros : ros,
-    rootObject : rootObject,
-    continuous : continuous,
-    topic : map_topic
-  });
+  if (client === null) {
+    client = new ROS2D.OccupancyGridClient({
+      ros : ros,
+      rootObject : rootObject,
+      continuous : continuous,
+      topic : map_topic
+    });
+  }
 
   var navigator = new NAV2D.Navigator({
     ros: ros,
     tfClient: tfClient,
+    robotClient: robotClient,
     serverName: serverName,
     actionName: actionName,
-    robot_pose : robot_pose,
+    robot_pose: robot_pose,
     rootObject: rootObject,
     withOrientation: withOrientation,
-    image: image
+    image: image,
+    fillColor: fillColor
   });
 
   client.on('change', function() {

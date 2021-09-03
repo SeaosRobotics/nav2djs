@@ -1,10 +1,11 @@
 /**
  * @author Russell Toris - rctoris@wpi.edu
  * @author Lars Kunze - l.kunze@cs.bham.ac.uk
+ * Modified by David Molina - molina@seaos.co.jp
  */
 
 var NAV2D = NAV2D || {
-  REVISION : '0.5.0-SNAPSHOT'
+  REVISION : '0.6.0'
 };
 
 /**

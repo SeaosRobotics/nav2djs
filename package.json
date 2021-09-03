@@ -1,5 +1,9 @@
 {
   "name": "nav2djs",
+  "homepage": "https://github.com/SeaosRobotics/nav2djs",
+  "description": "2D Navigation widgets",
+  "version": "0.6.0",
+  "license": "BSD",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-concat": "~0.1.3",
