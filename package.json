@@ -4,6 +4,9 @@
   "description": "2D Navigation widgets",
   "version": "0.6.0",
   "license": "BSD",
+  "scripts": {
+    "build": "grunt build"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-concat": "~0.1.3",
